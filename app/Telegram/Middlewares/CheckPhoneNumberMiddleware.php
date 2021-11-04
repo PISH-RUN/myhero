@@ -54,7 +54,7 @@ class CheckPhoneNumberMiddleware implements Middleware
     {
         return Keyboard::make([
             'keyboard' => [[[
-                'text' => __('telegram.phone_number'),
+                'text' => __('telegram.share_phone_number'),
                 'request_contact' => true
             ]]],
             'resize_keyboard' => true,

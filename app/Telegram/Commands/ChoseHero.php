@@ -3,7 +3,6 @@
 
 namespace App\Telegram\Commands;
 
-
 use App\Telegram\NeedRecommend;
 use Telegram\Bot\Keyboard\Keyboard;
 
@@ -16,7 +15,7 @@ trait ChoseHero
         $results = $this->recommend()->get();
 
         if (is_null($results)) {
-            $this->replyWithMessage(['text' => __('telegram.choose_hero'), 'reply_markup' => $this->chooseHeroMarkup()]);
+            $this->sendMessage(__('telegram.choose_hero'), ['reply_markup' => $this->chooseHeroMarkup()]);
             return false;
         }
 
@@ -28,7 +27,7 @@ trait ChoseHero
         return Keyboard::make([
             'inline_keyboard' => [
                 [
-                    ['text' => __('telegram.myhero_url'), 'url' => config("myhero.site")]
+                    ['text' => __('telegram.myhero_website'), 'url' => config("myhero.site")]
                 ]
             ]
         ]);

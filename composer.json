@@ -10,10 +10,11 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "irazasyed/telegram-bot-sdk": "^3.4.1",
         "laravel/framework": "^8.65",
+        "laravel/nova": "*",
         "laravel/sanctum": "^2.11",
         "laravel/telescope": "^4.6",
         "laravel/tinker": "^2.5",
-        "laravel/nova": "*"
+        "statikbe/laravel-nova-chained-translation-manager": "^1.4"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.7",

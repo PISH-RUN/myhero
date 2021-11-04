@@ -29,7 +29,7 @@ class ResultCommand extends Command
             ['reply_markup' => $this->removeKeyboard()]
         );
 
-        $this->sendMessage(__('telegram.result.result', [
+        $this->sendMessage(__('telegram.result.description', [
             'description' => $type->description
         ]), [
             'reply_to_message_id' => $message->message_id

@@ -51,7 +51,7 @@ class RecommendCallback extends Callback
             $poster = Arr::get($recommend, 'poster');
 
             $text = __(
-                'telegram.recommends.book',
+                'telegram.recommends.film',
                 ['name' => $name, 'genre' => $genre]
             );
 
@@ -100,7 +100,7 @@ class RecommendCallback extends Callback
             $teller = Arr::get($recommend, 'teller');
 
             $text = __(
-                'telegram.recommends.teller',
+                'telegram.recommends.podcast',
                 ['name' => $name, 'genre' => $genre, 'teller' => $teller]
             );
 
@@ -117,7 +117,7 @@ class RecommendCallback extends Callback
             $attractiveness = Arr::get($recommend, 'attractiveness');
 
             $text = __(
-                'telegram.recommends.music',
+                'telegram.recommends.advice',
                 ['title' => $title, 'subject' => $subject, 'description' => $description, 'attractiveness' => $attractiveness]
             );
 
