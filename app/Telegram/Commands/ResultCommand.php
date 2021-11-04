@@ -17,7 +17,7 @@ class ResultCommand extends Command
 
         $type = $this->recommend()->getType();
 
-        $type->avatar = "https://source.unsplash.com/random";
+        $type->avatar = "https://www.incimages.com/uploaded_files/image/1920x1080/getty_862457080_200012792000928089_371310.jpg";
 
         $message = $this->sendPhoto(
             $type->avatar,

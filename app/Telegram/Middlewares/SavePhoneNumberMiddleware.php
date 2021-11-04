@@ -24,6 +24,10 @@ class SavePhoneNumberMiddleware implements Middleware
 
     public function handle(Update $update, Closure $next)
     {
+        if (!is_null(TelegramUser::current()->phone_number)) {
+            return $next($update);
+        }
+
         if ($this->sharingPhoneNumber($update)) {
             return false;
         }
