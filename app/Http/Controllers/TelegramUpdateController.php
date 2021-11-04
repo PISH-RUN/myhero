@@ -11,6 +11,10 @@ class TelegramUpdateController extends Controller
 
     public function __invoke(): string
     {
+        if (config('myhero.disable')) {
+            return 'ok';
+        }
+
         $this->updateHandler->run();
 
         return 'ok';

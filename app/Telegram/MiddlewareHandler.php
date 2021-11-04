@@ -7,6 +7,7 @@ namespace App\Telegram;
 use App\Telegram\Middlewares\CheckPhoneNumberMiddleware;
 use App\Telegram\Middlewares\Middleware;
 use App\Telegram\Middlewares\SavePhoneNumberMiddleware;
+use App\Telegram\Middlewares\StateMiddleware;
 use App\Telegram\Middlewares\UserMiddleware;
 use App\Telegram\Middlewares\WelcomeMiddleware;
 use Closure;
@@ -19,7 +20,8 @@ class MiddlewareHandler
         UserMiddleware::class,
         WelcomeMiddleware::class,
         SavePhoneNumberMiddleware::class,
-        CheckPhoneNumberMiddleware::class
+        CheckPhoneNumberMiddleware::class,
+        StateMiddleware::class
     ];
 
     protected ?Collection $loadedMiddleware = null;

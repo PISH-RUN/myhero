@@ -3,18 +3,15 @@
 
 namespace App\Telegram\Commands;
 
+use App\Telegram\NeedRecommend;
 use Telegram\Bot\Keyboard\Keyboard;
 
 class RecommendCommand extends Command
 {
-    use ChoseHero;
+    use NeedRecommend;
 
     public function handle()
     {
-        if (!$this->checkChoseHero()) {
-            return;
-        }
-
         $this->sendMessage(__('telegram.recommend'), ['reply_markup' => $this->recommendReplyMarkup()]);
     }
 

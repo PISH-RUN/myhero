@@ -5,6 +5,7 @@ namespace App\Telegram\Middlewares;
 use App\Models\TelegramUser;
 use App\Telegram\Traits\ChatId;
 use Closure;
+use Illuminate\Support\Arr;
 use Telegram\Bot\Api;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Objects\Update;
@@ -12,6 +13,11 @@ use Telegram\Bot\Objects\Update;
 class CheckPhoneNumberMiddleware implements Middleware
 {
     use ChatId;
+
+    protected array $except = [
+        "/^\/help$/",
+        "/^\/rules$/"
+    ];
 
     public function __construct(public Api $telegram)
     {
@@ -21,13 +27,31 @@ class CheckPhoneNumberMiddleware implements Middleware
     {
         $user = TelegramUser::current();
 
-        if ($this->hasPhoneNumber($user)) {
+        if ($this->hasPhoneNumber($user) || $this->bypass($update)) {
             return $next($update);
         }
 
         $this->askPhoneNumber($update);
 
         return null;
+    }
+
+    protected function bypass(Update $update): bool
+    {
+        $text = Arr::get($update, 'message.text');
+
+        if (is_null($text)) {
+            return false;
+        }
+
+        foreach ($this->except as $pattern) {
+            $result = preg_match($pattern, $text);
+            if ($result === 1) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     protected function hasPhoneNumber(?TelegramUser $user): bool

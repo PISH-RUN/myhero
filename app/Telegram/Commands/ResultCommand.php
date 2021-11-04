@@ -3,18 +3,15 @@
 
 namespace App\Telegram\Commands;
 
+use App\Telegram\NeedRecommend;
 use Telegram\Bot\Keyboard\Keyboard;
 
 class ResultCommand extends Command
 {
-    use ChoseHero;
+    use NeedRecommend;
 
     public function handle()
     {
-        if (!$this->checkChoseHero()) {
-            return;
-        }
-
         $type = $this->recommend()->getType();
 
         $type->avatar = "https://www.incimages.com/uploaded_files/image/1920x1080/getty_862457080_200012792000928089_371310.jpg";
@@ -23,8 +20,7 @@ class ResultCommand extends Command
             $type->avatar,
             __('telegram.result.caption', [
                 'title' => $type->title,
-                'nickname' => $type->nickname,
-                'description' => $type->description
+                'nickname' => $type->nickname
             ]),
             ['reply_markup' => $this->removeKeyboard()]
         );

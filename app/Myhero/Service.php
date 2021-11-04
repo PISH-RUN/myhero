@@ -40,4 +40,19 @@ class Service
         return null;
     }
 
+    public function postSharePicture(string $phone, string $url)
+    {
+        $response = $this->client->post('/main/result/telegram_share/', [
+            'api_key' => $this->apiKey,
+            'phone' => Mobile::local($phone),
+            'photo' => $url
+        ]);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        return null;
+    }
+
 }

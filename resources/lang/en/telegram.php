@@ -18,8 +18,20 @@ return [
     'musics' => 'musics',
     'podcasts' => 'podcasts',
     'advices' => 'advices',
+    'share' => 'Choose how you want to share your result?',
+    'access_profile_picture_error' => "There is a problem with your profile picture, there are 2 possibilities: " . "\n" .
+        "1. You should Allow access to profile picture for everyone in settings -> privacy and security -> profile photo" . "\n" .
+        "2. You didn't set any profile photo yet",
+    'error' => "something went wrong please try in a few minutes again",
+    'shares' => [
+        'profile_picture_button' => 'Use My Profile Picture',
+        'upload_picture_button' => 'I Want to Upload My Photo',
+        'ask_upload_picture' => 'Please send your photo as photo for sharing picture (file will not accepted)'
+    ],
+    'should_be_photo' => 'Message type should be photo, please upload a photo',
+    'repeat_share' => 'If you want to upload a photo for share please press Upload photo button again or you can continue to use bot',
     'result' => [
-        'caption' => ":title \n :nickname \n :description",
+        'caption' => ":title \n :nickname",
         'description' => ":description"
     ],
     'recommends' => [
@@ -27,6 +39,7 @@ return [
         'book' => ":name :writer",
         'music' => ":name",
         'podcast' => ":name",
-        'advice' => ":title"
+        'advice' => ":title",
+        'url' => "Show More"
     ]
 ];
