@@ -39,7 +39,7 @@ return [
         'book' => ":name :writer",
         'music' => ":name",
         'podcast' => ":name",
-        'advice' => ":title",
+        'advice' => "title: :title \n description: :description",
         'url' => "Show More"
     ]
 ];
