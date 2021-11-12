@@ -39,13 +39,17 @@ class MessageHandler implements Handler
         app()->make(UnknownHandler::class)->handle();
     }
 
-    protected function getText(Update $updates)
+    protected function getText(Update $updates): ?string
     {
         return Arr::get($updates, 'message.text');
     }
 
-    protected function isCommand(string $text): bool
+    protected function isCommand(?string $text): bool
     {
+        if (is_null($text)) {
+            return false;
+        }
+
         return Str::startsWith($text, "/");
     }
 

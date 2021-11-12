@@ -14,15 +14,17 @@ class ResultCommand extends Command
     {
         $type = $this->recommend()->getType();
 
-        $type->avatar = "https://www.incimages.com/uploaded_files/image/1920x1080/getty_862457080_200012792000928089_371310.jpg";
+        if (is_null($type)) {
+            $this->sendSignupMessage();
+            return;
+        }
 
         $message = $this->sendPhoto(
             $type->avatar,
             __('telegram.result.caption', [
                 'title' => $type->title,
                 'nickname' => $type->nickname
-            ]),
-            ['reply_markup' => $this->removeKeyboard()]
+            ])
         );
 
         $this->sendMessage(__('telegram.result.description', [
@@ -32,10 +34,19 @@ class ResultCommand extends Command
         ]);
     }
 
-    protected function removeKeyboard(): Keyboard
+    protected function sendSignupMessage()
+    {
+        $this->sendMessage(__('telegram.choose_hero'), ['reply_markup' => $this->signupKeyboard()]);
+    }
+
+    protected function signupKeyboard()
     {
         return Keyboard::make([
-            'remove_keyboard' => true
+            "inline_keyboard" => [
+                [
+                    ["text" => __('telegram.myhero_website'), 'url' => config('myhero.site')]
+                ]
+            ]
         ]);
     }
 }

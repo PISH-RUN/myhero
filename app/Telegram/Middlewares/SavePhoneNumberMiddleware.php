@@ -6,11 +6,9 @@ use App\Models\TelegramUser;
 use App\Telegram\Commands\ResultCommand;
 use App\Telegram\Traits\ChatId;
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Telegram\Bot\Api;
 use Telegram\Bot\Keyboard\Keyboard;
-use Telegram\Bot\Laravel\Facades\Telegram;
 use Telegram\Bot\Objects\Update;
 
 class SavePhoneNumberMiddleware implements Middleware
@@ -61,6 +59,7 @@ class SavePhoneNumberMiddleware implements Middleware
             $this->sendContactOwnershipWarning($update);
         } else {
             $this->setPhoneNumber($user, $contact);
+            $this->sendPhoneSavedMessage($update);
             $this->showResult();
         }
 
@@ -83,5 +82,22 @@ class SavePhoneNumberMiddleware implements Middleware
     protected function showResult(): void
     {
         app()->make(ResultCommand::class)->handle();
+    }
+
+    protected function sendPhoneSavedMessage(Update $update)
+    {
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chatId($update),
+            'text' => __('telegram.phone_saved'),
+            'reply_markup' => $this->removeKeyboard(),
+            'reply_to_message_id' => $update->message->message_id
+        ]);
+    }
+
+    protected function removeKeyboard(): Keyboard
+    {
+        return Keyboard::make([
+            'remove_keyboard' => true
+        ]);
     }
 }

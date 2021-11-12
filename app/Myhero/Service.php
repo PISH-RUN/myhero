@@ -42,10 +42,10 @@ class Service
 
     public function postSharePicture(string $phone, string $url)
     {
-        $response = $this->client->post('/main/result/telegram_share/', [
+        $response = $this->client->post('/main/result/telegram-request-video-image/', [
             'api_key' => $this->apiKey,
             'phone' => Mobile::local($phone),
-            'photo' => $url
+            'image' => $url
         ]);
 
         if ($response->successful()) {

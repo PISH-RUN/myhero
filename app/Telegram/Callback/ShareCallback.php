@@ -10,12 +10,13 @@ use App\Myhero\ShareService;
 use App\Telegram\Handlers\Custom\UploadProfilePictureHandler;
 use App\Telegram\NeedRecommend;
 use App\Telegram\StateManager;
+use App\Telegram\Traits\ShareResult;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ShareCallback extends Callback
 {
-    use NeedRecommend;
+    use NeedRecommend, ShareResult;
 
     public function handle($value)
     {
@@ -59,23 +60,6 @@ class ShareCallback extends Callback
     protected function sendUploadPictureMessage()
     {
         $this->sendMessage(__('telegram.shares.ask_upload_picture'));
-    }
-
-    protected function share(string $pictureId)
-    {
-        $photo = ShareService::user(TelegramUser::current())->upload($pictureId);
-
-        if (is_null($photo)) {
-            $this->sendMessage(__("telegram.error"));
-            return;
-        }
-
-        $this->sendSharedPhoto($photo);
-    }
-
-    protected function sendSharedPhoto(string $photo)
-    {
-        $this->sendPhoto($photo);
     }
 
     protected function sendAccessDeniedPictureMessage()

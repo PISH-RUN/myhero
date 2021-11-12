@@ -69,6 +69,17 @@ abstract class Callback
         return $this->telegram->sendPhoto($params);
     }
 
+    public function sendVideo(string $video, ?string $caption = null, array $params = []): Message
+    {
+        $params = array_filter(array_merge([
+            'chat_id' => $this->chatId(),
+            'video' => InputFile::create($video, 'video.mp4'),
+            'caption' => $caption
+        ], $params));
+
+        return $this->telegram->sendVideo($params);
+    }
+
     protected function normalizePhotoUrl(string $photo): string
     {
         return $photo = explode('?', $photo)[0];

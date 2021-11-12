@@ -4,6 +4,7 @@ return [
     'no_recommend' => "There is no recommendation, please try another recommend",
     'choose_hero' => "Please first select your heroes in myhero site",
     'myhero_website' => 'Myhero Website',
+    'phone_saved' => 'Thank you, Your phone saved successfully',
     'start' => 'For the start please attach your phone number to your account',
     'welcome' => 'Welcome to our bots',
     'help' => 'Do you need any help? please go to the myhe.ro website',

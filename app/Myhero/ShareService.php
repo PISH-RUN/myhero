@@ -28,14 +28,14 @@ class ShareService
 
     /**
      * @param string $fileId
-     * @return string|null
+     * @return array|null
      * @throws FilePathNullException
      */
-    public function upload(string $fileId): ?string
+    public function upload(string $fileId): ?array
     {
         $url = $this->url($fileId);
         $response = $this->myhero->postSharePicture($this->telegramUser->phone_number, $url);
-        return Arr::get($response, 'photo');
+        return Arr::get($response, 'result');
     }
 
     /**

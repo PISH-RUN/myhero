@@ -8,6 +8,7 @@ use App\Models\TelegramUser;
 use App\Myhero\ShareService;
 use App\Telegram\Handlers\Handler;
 use App\Telegram\Traits\MessageMethod;
+use App\Telegram\Traits\ShareResult;
 use App\Telegram\Utils\SendShareResponse;
 use Illuminate\Support\Arr;
 use Telegram\Bot\Api;
@@ -15,7 +16,7 @@ use Telegram\Bot\Objects\Update;
 
 class UploadProfilePictureHandler implements Handler
 {
-    use MessageMethod;
+    use MessageMethod, ShareResult;
 
     public function __construct(public Api $telegram)
     {
@@ -33,12 +34,7 @@ class UploadProfilePictureHandler implements Handler
             return;
         }
 
-        $this->sendSharedPhoto($pictureId);
-    }
-
-    protected function getSharePhoto(string $pictureId): ?string
-    {
-        return ShareService::user(TelegramUser::current())->upload($pictureId);
+        $this->share($pictureId);
     }
 
     protected function getPhoto(Update $update): ?string
@@ -50,17 +46,5 @@ class UploadProfilePictureHandler implements Handler
     {
         $this->sendMessage(__("telegram.should_be_photo"));
         $this->sendMessage(__("telegram.repeat_share"));
-    }
-
-    protected function sendSharedPhoto(string $pictureId)
-    {
-        $photo = $this->getSharePhoto($pictureId);
-
-        if (is_null($photo)) {
-            $this->sendMessage(__('telegram.error'));
-            return;
-        }
-
-        $this->sendPhoto($photo);
     }
 }
