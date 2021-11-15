@@ -19,6 +19,7 @@ class RecommendCallback extends Callback
         $this->answerCallbackQuery(__("telegram.recommend_selection"));
 
         $recommends = $this->recommend()->get()[$value];
+
         if (method_exists($this, $value)) {
             if (count($recommends) === 0) {
                 $this->sendThereIsNoRecommendation();

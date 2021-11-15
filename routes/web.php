@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShareVideoHookController;
 use App\Http\Controllers\TelegramUpdateController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,14 @@ Route::get('/', function () {
 });
 
 Route::post(
+    "api/".config('myhero.api-key'),
+    ShareVideoHookController::class
+);
+
+Route::post(
     config('telegram.bots.myhero.webhook_url'),
     TelegramUpdateController::class
 )->middleware();
 //['telegram.user', 'telegram.welcome', 'telegram.phone_number']
+
+

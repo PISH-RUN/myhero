@@ -14,6 +14,7 @@ return [
     'share_phone_number' => "Share my phone number",
     'contact_ownership_warning' => "Please provide your phone number that you are using on this account, others are not acceptable",
     'recommend' => 'these are the recommendations, please select one category',
+    'video_is_processing' => 'The result video has been queued to create for you, when video is ready we send it for you immediately',
     'films' => 'films',
     'books' => 'books',
     'musics' => 'musics',

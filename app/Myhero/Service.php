@@ -48,6 +48,9 @@ class Service
             'image' => $url
         ]);
 
+        dump($response->json());
+        dump($response->status());
+
         if ($response->successful()) {
             return $response->json();
         }
