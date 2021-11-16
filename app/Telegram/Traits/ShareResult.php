@@ -12,7 +12,6 @@ trait ShareResult
     protected function share(string $pictureId)
     {
         $result = ShareService::user(TelegramUser::current())->upload($pictureId);
-        dump($result);
         if (is_null($result)) {
             $this->sendMessage(__("telegram.error"));
             return;

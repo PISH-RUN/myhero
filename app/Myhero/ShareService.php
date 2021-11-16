@@ -35,7 +35,6 @@ class ShareService
     {
         $url = $this->url($fileId);
         $response = $this->myhero->postSharePicture($this->telegramUser->phone_number, $url);
-        dump($response);
         return Arr::get($response, 'result.contents');
     }
 
