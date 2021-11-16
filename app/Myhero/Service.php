@@ -30,7 +30,7 @@ class Service
     {
         $response = $this->client->post('/main/result/telegram_recommended_contents/', [
             'api_key' => $this->apiKey,
-            'phone' => Mobile::local($phone)
+            'phone' => $phone
         ]);
 
         if ($response->successful()) {
@@ -44,12 +44,9 @@ class Service
     {
         $response = $this->client->post('/main/result/telegram-request-video-image/', [
             'api_key' => $this->apiKey,
-            'phone' => Mobile::local($phone),
+            'phone' => $phone,
             'image' => $url
         ]);
-
-        dump($response->json());
-        dump($response->status());
 
         if ($response->successful()) {
             return $response->json();

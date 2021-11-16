@@ -23,7 +23,7 @@ class ShareVideoHookController extends Controller
         $phone = $request->get('phone');
 
         /** @var TelegramUser|null $telegramUser */
-        $telegramUser = TelegramUser::where('phone_number', Mobile::international($phone))->first();
+        $telegramUser = TelegramUser::where('phone_number', $phone)->first();
 
         if (is_null($telegramUser)) {
             return response()->json([
