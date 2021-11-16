@@ -3,6 +3,7 @@
 namespace App\Telegram\Middlewares;
 
 use App\Models\TelegramUser;
+use App\Telegram\Commands\RecommendCommand;
 use App\Telegram\Commands\ResultCommand;
 use App\Telegram\Traits\ChatId;
 use Closure;
@@ -82,6 +83,7 @@ class SavePhoneNumberMiddleware implements Middleware
     protected function showResult(): void
     {
         app()->make(ResultCommand::class)->handle();
+        app()->make(RecommendCommand::class)->handle();
     }
 
     protected function sendPhoneSavedMessage(Update $update)
