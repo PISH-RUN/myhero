@@ -31,7 +31,7 @@ class WelcomeMiddleware implements Middleware
     {
         $this->telegram->sendMessage([
             'chat_id' => $this->chatId($update),
-            'text' => 'telegram.welcome'
+            'text' => __('telegram.welcome')
         ]);
     }
 
