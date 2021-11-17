@@ -82,8 +82,10 @@ class SavePhoneNumberMiddleware implements Middleware
 
     protected function showResult(): void
     {
-        app()->make(ResultCommand::class)->handle();
-        app()->make(RecommendCommand::class)->handle();
+        /** @var ResultCommand $resultCommand */
+        $resultCommand = app()->make(ResultCommand::class);
+
+        $resultCommand->shouldRunRecommend()->handle();
     }
 
     protected function sendPhoneSavedMessage(Update $update)

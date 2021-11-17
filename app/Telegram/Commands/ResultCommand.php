@@ -10,6 +10,14 @@ class ResultCommand extends Command
 {
     use NeedRecommend;
 
+    protected bool $runRecommends = false;
+
+    public function shouldRunRecommend()
+    {
+        $this->runRecommends = true;
+        return $this;
+    }
+
     public function handle()
     {
         $type = $this->recommend()->getType();
@@ -39,6 +47,10 @@ class ResultCommand extends Command
         ]), [
             'reply_to_message_id' => $message->message_id
         ]);
+
+        if ($this->runRecommends) {
+            app()->make(RecommendCommand::class)->handle();
+        }
     }
 
     protected function sendSignupMessage()
