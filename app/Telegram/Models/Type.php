@@ -16,11 +16,14 @@ class Type
 
     public ?string $avatar;
 
+    public ?string $hat;
+
     public function __construct(array $type)
     {
         $this->title = Arr::get($type, 'title');
         $this->nickname = Arr::get($type, 'nikname');
         $this->description = Arr::get($type, 'description');
         $this->avatar = Arr::get($type, 'avatar');
+        $this->hat = Arr::get($type, 'hat');
     }
 }

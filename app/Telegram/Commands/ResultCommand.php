@@ -27,15 +27,17 @@ class ResultCommand extends Command
             return;
         }
 
-        if (!$type->avatar) {
+        if (!$type->hat && !$type->avatar) {
             $this->sendMessage(__('telegram.result.description', [
                 'description' => $type->description
             ]));
             return;
         }
 
+        $photo = $type->hat ?? $type->avatar;
+
         $message = $this->sendPhoto(
-            $type->avatar,
+            $photo,
             __('telegram.result.caption', [
                 'title' => $type->title,
                 'nickname' => $type->nickname
