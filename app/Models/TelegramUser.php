@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\Mobile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -40,7 +41,7 @@ class TelegramUser extends Model
 
     public function updatePhoneNumber(string $phoneNumber)
     {
-        $this->phone_number = $phoneNumber;
+        $this->phone_number = Mobile::withPlus($phoneNumber);
         $this->save();
     }
 }
