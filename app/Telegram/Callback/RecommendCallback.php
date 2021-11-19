@@ -81,14 +81,14 @@ class RecommendCallback extends Callback
             $name = Arr::get($recommend, 'name');
             $genre = Arr::get($recommend, 'genre');
             $poster = Arr::get($recommend, 'poster');
-            $url = Arr::get($recommend, 'url');
+            $filimo = Arr::get($recommend, 'filimo');
 
             $text = __(
                 'telegram.recommends.film',
                 ['name' => $name, 'genre' => $genre]
             );
 
-            $this->sendPhotoIfExists($text, $poster, $url);
+            $this->sendPhotoIfExists($text, $poster, $filimo);
         }
     }
 
@@ -123,14 +123,14 @@ class RecommendCallback extends Callback
             $name = Arr::get($recommend, 'name');
             $writer = Arr::get($recommend, 'writer');
             $pic = Arr::get($recommend, 'pic');
-            $url = Arr::get($recommend, 'url');
+            $link = Arr::get($recommend, 'link');
 
             $text = __(
                 'telegram.recommends.book',
                 ['name' => $name, 'writer' => $writer]
             );
 
-            $this->sendPhotoIfExists($text, $pic, $url);
+            $this->sendPhotoIfExists($text, $pic, $link);
         }
     }
 
@@ -141,14 +141,15 @@ class RecommendCallback extends Callback
             $name = Arr::get($recommend, 'name');
             $genre = Arr::get($recommend, 'genre');
             $singer = Arr::get($recommend, 'singer');
-            $url = Arr::get($recommend, 'url');
+            $pic = Arr::get($recommend, 'pick');
+            $link = Arr::get($recommend, 'link');
 
             $text = __(
                 'telegram.recommends.music',
                 ['name' => $name, 'genre' => $genre, 'singer' => $singer]
             );
 
-            $this->sendMessageWithUrl($text, $url);
+            $this->sendPhotoIfExists($text, $pic, $link);
         }
     }
 
@@ -159,14 +160,14 @@ class RecommendCallback extends Callback
             $name = Arr::get($recommend, 'name');
             $genre = Arr::get($recommend, 'genre');
             $teller = Arr::get($recommend, 'teller');
-            $url = Arr::get($recommend, 'url');
+            $link = Arr::get($recommend, 'link');
 
             $text = __(
                 'telegram.recommends.podcast',
                 ['name' => $name, 'genre' => $genre, 'teller' => $teller]
             );
 
-            $this->sendMessageWithUrl($text, $url);
+            $this->sendMessageWithUrl($text, $link);
         }
     }
 }
