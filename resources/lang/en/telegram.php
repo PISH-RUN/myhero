@@ -42,6 +42,7 @@ return [
         'music' => ":name",
         'podcast' => ":name",
         'advice' => "title: :title \n description: :description",
-        'url' => "Show More"
+        'url' => "Show More",
+        'filimo' => "Filimo"
     ]
 ];

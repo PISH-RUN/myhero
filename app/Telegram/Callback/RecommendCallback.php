@@ -53,13 +53,14 @@ class RecommendCallback extends Callback
         }
     }
 
-    public function sendMessageWithUrl(string $text, ?string $url)
+    public function sendMessageWithUrl(string $text, ?string $url, ?string $urlText = null)
     {
         $params = [];
+        $urlText = $urlText ?? __('text.recommends.url');
 
         if (!is_null($url)) {
             $params = [
-                'reply_markup' => $this->keyboardUrl(__('text.recommends.url'), $url)
+                'reply_markup' => $this->keyboardUrl($urlText, $url)
             ];
         }
 
@@ -88,27 +89,28 @@ class RecommendCallback extends Callback
                 ['name' => $name, 'genre' => $genre]
             );
 
-            $this->sendPhotoIfExists($text, $poster, $filimo);
+            $this->sendPhotoIfExists($text, $poster, $filimo, __('telegram.recommends.filimo'));
         }
     }
 
-    protected function sendPhotoIfExists(string $text, ?string $photo, ?string $url)
+    protected function sendPhotoIfExists(string $text, ?string $photo, ?string $url, ?string $urlText = null)
     {
         if (is_null($photo)) {
-            $this->sendMessageWithUrl($text, $url);
+            $this->sendMessageWithUrl($text, $url, $urlText);
             return;
         }
 
-        $this->sendPhotoWithUrl($photo, $text, $url);
+        $this->sendPhotoWithUrl($photo, $text, $url, $urlText);
     }
 
-    public function sendPhotoWithUrl(string $photo, string $text, ?string $url)
+    public function sendPhotoWithUrl(string $photo, string $text, ?string $url, ?string $urlText = null)
     {
         $params = [];
+        $urlText = $urlText ?? __('text.recommends.url');
 
         if (!is_null($url)) {
             $params = [
-                'reply_markup' => $this->keyboardUrl(__('text.recommends.url'), $url)
+                'reply_markup' => $this->keyboardUrl($urlText, $url)
             ];
         }
 
